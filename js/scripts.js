@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
 const botonArrancarTm = document.getElementById("arrancarTm");
 const botonDetenerTm = document.getElementById("detenerTm");
 
+// Quitar iniciar
+botonArrancarTm.onclick = () => {
+    botonArrancarTm.style.display = "none"
+}
+
+
 botonArrancarTm.addEventListener("click", () => tempoStart())
 botonDetenerTm.addEventListener("click", () => tempoStop())
 
@@ -32,6 +38,7 @@ function tempoStart() {
             clearInterval(sec)
             audio.play()
             segundos.value = 0
+            botonArrancarTm.style.display = "initial"
         }
         }, 1000)
     }
