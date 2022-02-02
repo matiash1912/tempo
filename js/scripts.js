@@ -15,6 +15,10 @@ botonArrancarTm.onclick = () => {
     botonArrancarTm.style.display = "none"
 }
 
+botonDetenerTm.onclick = () => {
+    botonArrancarTm.style.display = "initial"
+}
+
 
 botonArrancarTm.addEventListener("click", () => tempoStart())
 botonDetenerTm.addEventListener("click", () => tempoStop())
@@ -29,6 +33,10 @@ let sec
 const audio = new Audio("../audio/endTime.mp3")
 
 function tempoStart() {
+    if (minutos.value !== 0 && segundos.value !== 0) {
+        botonArrancarTm.value = "Reanudar"
+    }
+    
     // Solo segundos   
     if(minutos.value == 0 ){
         sec = setInterval(() => {
