@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Timer</title>
+</head>
+<body>
+    <header>
+        <h1>Maty'S Timer</h1>
+        <img src="img/dark-mode.svg" alt="modo-oscuro" id="modo-oscuro" class="moon">
+    </header>
+
+    <main>
+        
+        <a href="cronometro.html" title="Cronometro">
+            <img src="img/chronometer-svgrepo-com.svg" alt="Cronometro" class="switch">
+        </a>
+
+        <h2>Temporizador</h2>
+        
+        <div class="indicadores">
+            <p>Minutos</p>
+            <p class="sec">Segundos</p>
+        </div>
+
+        <div class="contadores">
+            <!-- <input type="number" value="00" id="Horas" min="0" max="99"> -->
+            <input type="number" value="00" id="Minutos" min="0" max="99">
+            <input type="number" value="00" id="Segundos" min="0" max="59">
+        </div>
+
+        <div class="botones-temporizador">
+            <input type="submit" value="Iniciar" id="arrancarTm">
+            <input type="submit" value="Detener" id="detenerTm">
+        </div>
+       
+        
+    </main>
+
+    <footer>
+        <p>Todos los derechos reservados. Matias Hernandez &copy; </p> 
+    </footer>
+
+    <script src="js/scripts.js"></script>
+
+</body>
+</html>
