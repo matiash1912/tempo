@@ -27,79 +27,155 @@ botonDetenerTm.addEventListener("click", () => tempoStop())
 const minutos = document.getElementById("Minutos");
 const segundos = document.getElementById("Segundos");
 
-let sec 
+let timer 
 
 // Sonido Fin
 const audio = new Audio("../audio/endTime.mp3")
 
-let counter = 1
-let counterXminuto
+let counter = 0
+let minutes = 0
+let seconds = 0
 
-function tempoStart() {
-    if (minutos.value !== 0 && segundos.value !== 0) {
-        botonArrancarTm.value = "Reanudar"
-    }
-    
-    // Solo segundos   
-    if(minutos.value == 0 ){
-        sec = setInterval(() => {
-        segundos.value--
-
-        if(segundos.value <= 0){
-            clearInterval(sec)
-            audio.play()
-            segundos.value = 0
-            botonArrancarTm.style.display = "initial"
-        }
-        }, 1000)
-    }
-
-    // Si se ocupan minutos (minutos enteros)
-    if(minutos.value > 0){
-        counterXminuto = (minutos.value * 60) + 2
-        minutos.value--
-        
-        
-
-        counter = counter
-        botonDetenerTm.onclick(() => numeroMemoria())
-        
-        console.log(counterXminuto)
-
-        sec = setInterval(() => {
+const tempoStart = () => {
+    if (segundos.value > 0) {
+        timer = setInterval(() => {
             segundos.value--
             if (segundos.value < 0) {
-                segundos.value = 59
-            }
-            counter++
-
-            console.log(counter)
-
-            if(counter % 61 === 0){
-                minutos.value--
-
-                if (counter % 62 == 0 ) {
-                    counter--
-                }
-            }
-            
-            
-            if(counter == counterXminuto){
-                clearInterval(sec)
+                segundos.value = 0
                 audio.play()
+                clearInterval(timer)
+    
+            }
+        }, 1000)
+    }
+
+
+    minutes = (minutos.value) * (seconds + 60)
+    seconds = minutes
+
+    if (minutos.value > 0) {
+        
+
+        if(botonArrancarTm.value == "Iniciar"){
+            minutos.value--
+        }
+    
+        if(minutos.value == 0 && segundos.value == 0){
+            botonArrancarTm.value == "Iniciar"
+        }
+    
+        console.log(seconds)
+    
+        if (minutos.value !== 0 && segundos.value !== 0) {
+            botonArrancarTm.value = "Reanudar"
+        }
+    
+        seconds = memorizedRest()
+    
+        botonDetenerTm.addEventListener("click", () => seconds -= 60)
+    
+        console.log(seconds)
+        
+        if (counter % 59 === 0) {
+            segundos.value = 59
+        }
+    
+        timer = setInterval(() => {
+            counter++
+            segundos.value--
+            console.log(counter)
+            if (counter % 59 === 0) {
+                counter += 0
+                segundos.value = 59
+                minutos.value--
+            }
+            if (counter === seconds || minutos.value < 0) {
                 segundos.value = 0
                 minutos.value = 0
-            }
+                audio.play()
+                clearInterval(timer)
     
+            }
         }, 1000)
-    } 
+    
+    }
+
+ 
+
+
+
+    
+
 }
 
+// function tempoStart() {
+     
+//     // Solo segundos   
+//     if(minutos.value == 0 ){
+//         sec = setInterval(() => {
+//         segundos.value--
+
+//         if(segundos.value <= 0){
+//             clearInterval(sec)
+//             audio.play()
+//             segundos.value = 0
+//             botonArrancarTm.style.display = "initial"
+//         }
+//         }, 1000)
+//     }
+
+//     // Si se ocupan minutos (minutos enteros)
+//     if(minutos.value > 0){
+//         let counterXminuto = (minutos.value * 60) + 2
+
+//         counter = counter
+//         botonDetenerTm.onclick(() => numeroMemoria())
+        
+//         console.log(counterXminuto)
+
+//         sec = setInterval(() => {
+//             segundos.value--
+//             if (segundos.value < 0) {
+//                 segundos.value = 59
+//             }
+//             counter++
+
+//             console.log(counter)
+
+//             if(counter % 61 === 0){
+//                 minutos.value--
+
+//                 if (counter % 62 == 0 ) {
+//                     counter--
+//                 }
+//             }
+            
+            
+//             if(counter == counterXminuto){
+//                 clearInterval(sec)
+//                 audio.play()
+//                 segundos.value = 0
+//                 minutos.value = 0
+//             }
+    
+//         }, 1000)
+//     }
+    
+//     if(botonArrancarTm.value == "Iniciar"){
+//         minutos.value--
+//     }
+
+//     if (minutos.value !== 0 && segundos.value !== 0) {
+//         botonArrancarTm.value = "Reanudar"
+//     }
+// }
+
 const numeroMemoria = () => counter
+const memorizedRest = () => (seconds - counter)
 
 function tempoStop() {
-    clearInterval(sec)
-    botonArrancarTm.addEventListener("click", () => minutos.value++)
+    clearInterval(timer)
+    // botonArrancarTm.addEventListener("click", () => minutos.value++)
     
 }
 
