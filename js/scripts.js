@@ -32,6 +32,8 @@ let sec
 // Sonido Fin
 const audio = new Audio("../audio/endTime.mp3")
 
+let counter = -1
+
 function tempoStart() {
     if (minutos.value !== 0 && segundos.value !== 0) {
         botonArrancarTm.value = "Reanudar"
@@ -51,9 +53,13 @@ function tempoStart() {
         }, 1000)
     }
 
+
     // Si se ocupan minutos (minutos enteros)
     if(minutos.value > 0){
-        let counter = -1
+        
+        counter = counter
+        botonDetenerTm.onclick(() => numeroMemoria())
+
         let counterXminuto = (minutos.value * 59)
 
         sec = setInterval(() => {
@@ -63,10 +69,12 @@ function tempoStart() {
             }
             counter++
 
-            // console.log(counter)
-
-            if(counter % 59 === 0 || counter <= 0){
+            if(counter % 59 === 0){
                 minutos.value--
+
+                if (counter == 117 ) {
+                    counter--
+                }
             }
 
             if(counter == counterXminuto || minutos.value < 0){
@@ -78,11 +86,17 @@ function tempoStart() {
     
         }, 1000)
     }
+
+    
 }
+
+
 
 function tempoStop() {
     clearInterval(sec)
 }
+
+const numeroMemoria = () => counter
 
 function validarTimer() {
     let errores = [ ]
