@@ -37,7 +37,33 @@ let minutes = 0
 let seconds = 0
 
 const tempoStart = () => {
-    if (segundos.value > 0) {
+    if (minutos.value > 0 && segundos.value > 0) {
+        minutes = Number(minutos.value * 60)
+        seconds = Number(segundos.value)
+        let totalTime = minutes + seconds
+
+        timer = setInterval(() => {
+            counter++
+            segundos.value--
+            if(segundos.value == 0){
+                minutos.value--
+            }
+            
+            if(segundos.value == 0){
+                segundos.value = 59
+            }
+
+            if (counter === totalTime || minutos.value < 0 ) {
+                clearInterval(timer)
+                segundos.value= 0
+                minutos.value = 0
+                audio.play()
+                
+    
+            }
+        }, 1000)
+
+    } else if (segundos.value > 0) {
         timer = setInterval(() => {
             segundos.value--
             if (segundos.value < 0) {
@@ -47,13 +73,7 @@ const tempoStart = () => {
     
             }
         }, 1000)
-    }
-
-
-    minutes = (minutos.value) * (seconds + 60)
-    seconds = minutes
-
-    if (minutos.value > 0) {
+    } else if (minutos.value > 0) {
         
 
         if(botonArrancarTm.value == "Iniciar"){
@@ -79,7 +99,6 @@ const tempoStart = () => {
         timer = setInterval(() => {
             counter++
             segundos.value--
-            console.log(counter)
             if (counter % 59 === 0) {
                 counter += 0
                 segundos.value = 59
@@ -95,6 +114,8 @@ const tempoStart = () => {
         }, 1000)
     
     }
+
+
 }
 
 
@@ -104,10 +125,6 @@ const memorizedRest = () => (seconds - counter)
 function tempoStop() {
     clearInterval(timer)
 }
-
-
-
-console.log
 
 function validarTimer() {
     let errores = [ ]
