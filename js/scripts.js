@@ -64,8 +64,6 @@ const tempoStart = () => {
             botonArrancarTm.value == "Iniciar"
         }
     
-        console.log(seconds)
-    
         if (minutos.value !== 0 && segundos.value !== 0) {
             botonArrancarTm.value = "Reanudar"
         }
@@ -74,8 +72,6 @@ const tempoStart = () => {
     
         botonDetenerTm.addEventListener("click", () => seconds -= 60)
     
-        console.log(seconds)
-        
         if (counter % 59 === 0) {
             segundos.value = 59
         }
@@ -99,84 +95,14 @@ const tempoStart = () => {
         }, 1000)
     
     }
-
- 
-
-
-
-    
-
 }
 
-// function tempoStart() {
-     
-//     // Solo segundos   
-//     if(minutos.value == 0 ){
-//         sec = setInterval(() => {
-//         segundos.value--
-
-//         if(segundos.value <= 0){
-//             clearInterval(sec)
-//             audio.play()
-//             segundos.value = 0
-//             botonArrancarTm.style.display = "initial"
-//         }
-//         }, 1000)
-//     }
-
-//     // Si se ocupan minutos (minutos enteros)
-//     if(minutos.value > 0){
-//         let counterXminuto = (minutos.value * 60) + 2
-
-//         counter = counter
-//         botonDetenerTm.onclick(() => numeroMemoria())
-        
-//         console.log(counterXminuto)
-
-//         sec = setInterval(() => {
-//             segundos.value--
-//             if (segundos.value < 0) {
-//                 segundos.value = 59
-//             }
-//             counter++
-
-//             console.log(counter)
-
-//             if(counter % 61 === 0){
-//                 minutos.value--
-
-//                 if (counter % 62 == 0 ) {
-//                     counter--
-//                 }
-//             }
-            
-            
-//             if(counter == counterXminuto){
-//                 clearInterval(sec)
-//                 audio.play()
-//                 segundos.value = 0
-//                 minutos.value = 0
-//             }
-    
-//         }, 1000)
-//     }
-    
-//     if(botonArrancarTm.value == "Iniciar"){
-//         minutos.value--
-//     }
-
-//     if (minutos.value !== 0 && segundos.value !== 0) {
-//         botonArrancarTm.value = "Reanudar"
-//     }
-// }
 
 const numeroMemoria = () => counter
 const memorizedRest = () => (seconds - counter)
 
 function tempoStop() {
     clearInterval(timer)
-    // botonArrancarTm.addEventListener("click", () => minutos.value++)
-    
 }
 
 
